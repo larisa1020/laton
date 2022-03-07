@@ -1,0 +1,16 @@
+} /*
+ # \
+\begin{code}
+import Prelude hiding ((:)); import Data.List (intercalate); import Language.Haskell.TH; import Data.String; default (S, String, Integer, Double); data S = S; instance Eq S where { _ == _ = False }; instance IsString S where { fromString = const S }; ifThenElse c t e = case c of True -> t; False -> e
+cPP = False; {-
+#define cPP True
+-} main :: IO ()
+main = putStr ("I'm a Literate Haskell program" ++ bonus ++ ".\n") where
+  _ = (); bonus | null details = "" | otherwise = " (" ++ details ++ ")"
+  details = intercalate ", " [ name | (True, name) <- extensions ] :: String
+  extensions =
+    (bangPatterns,              "BangPatterns"             ) :
+    (templateHaskell,           "TemplateHaskell"          ) :
+    (rebindableSyntax,          "RebindableSyntax"         ) :
+    (magicHash,                 "MagicHash"                ) :
+    (overloadedStrings,         "OverloadedStrings"        ) :
